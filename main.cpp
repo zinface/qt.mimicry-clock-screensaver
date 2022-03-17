@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
  
 #ifdef QT_DEBUG
     view->resize(500,500);
-    view->page()->load(QUrl::fromLocalFile(a.applicationDirPath() + "/../mimicry-clock-screensaver/assets/index.html"));
+    view->page()->load(QUrl::fromLocalFile(a.applicationDirPath() + "/../assets/index.html"));
     view->show();
 #else
     QDesktopWidget *desktop = QApplication::desktop();
