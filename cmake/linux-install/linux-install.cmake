@@ -11,8 +11,12 @@ if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
     # 静态资源
     install(DIRECTORY
         assets
-        DESTINATION "share/${PROJECT_NAME}"
-    )
+        DESTINATION "share/${PROJECT_NAME}")
+    
+        # 适用于深度屏保预览的缩略图结构
+    install(DIRECTORY
+        rootfs/usr
+        DESTINATION "../")
 
     # import DebPackage
     find_package(DebPackage PATHS ${CMAKE_SOURCE_DIR})
