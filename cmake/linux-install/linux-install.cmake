@@ -10,7 +10,7 @@ if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
 
     # 静态资源
     install(DIRECTORY
-        assets
+        resources/assets
         DESTINATION "share/${PROJECT_NAME}")
     
         # 适用于深度屏保预览的缩略图结构
