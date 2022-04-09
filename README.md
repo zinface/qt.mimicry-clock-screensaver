@@ -1,6 +1,6 @@
 # qt.mimicry-clock-screensaver 
 
-> 适用于深度操作系统的屏保拟态时钟程序
+> 适用于深度操作系统的屏保拟态时钟程序 - [基于此屏幕保护程序 - 开发指南](development.md)
 
 ## 屏保演示
 

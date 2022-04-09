@@ -16,6 +16,11 @@ include_directories()
 # 资源文件路径
 set(QRC_SOURCES "")
 
+# 使用宏进行配置 config.h
+# 将项目名定义为资源结构路径 /usr/share/ + 项目名 + /assets/index.html
+set(APP_NAME "屏保拟态时钟")
+configure_file(cmake/config.h.in config.h @ONLY)
+
 add_executable(${PROJECT_NAME} "main.cpp"
     # "mainwindow.cpp" "mainwindow.h"
     ${QRC_SOURCES}

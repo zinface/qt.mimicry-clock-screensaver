@@ -2,6 +2,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QWebEngineView>
+#include <config.h>
 
 void moveCenter(QWidget &wm) {
     QDesktopWidget *desktop = QApplication::desktop();
@@ -11,7 +12,7 @@ void moveCenter(QWidget &wm) {
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    a.setApplicationName("屏保拟态时钟");
+    a.setApplicationName(APP_NAME);
 
     QWebEngineView *view = new QWebEngineView();
     
@@ -34,14 +35,14 @@ int main(int argc, char *argv[])
  
 #ifdef QT_DEBUG
     view->resize(500,500);
-    view->page()->load(QUrl::fromLocalFile(a.applicationDirPath() + "/../assets/index.html"));
+    view->page()->load(QUrl::fromLocalFile(a.applicationDirPath() + "/../resources/assets/index.html"));
     view->show();
 #else
     QDesktopWidget *desktop = QApplication::desktop();
     view->resize(desktop->width(),desktop->height());
 
     // 程序默认为时钟屏保，如果你想增加逼格.. 可修改此处      
-    view->page()->load(QUrl::fromLocalFile("/usr/share/mimicry-clock-screensaver/assets/index.html"));
+    view->page()->load(QUrl::fromLocalFile("/usr/share/" PROJECT_NAME "/assets/index.html"));
     view->show();
 
     // 如果你不小心手动运行了它，你将需要进入 tty 模式 kill 掉该程序
