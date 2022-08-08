@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.5.1)
 
 project(mimicry-clock-screensaver LANGUAGES CXX VERSION 0.0.1)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
