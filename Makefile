@@ -11,7 +11,5 @@ release:
 	cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
 	cd build && make
 
-package:
-	mkdir -p build
-	cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
+package: release
 	cd build && make package
