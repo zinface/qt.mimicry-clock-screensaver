@@ -114,9 +114,23 @@ function(set_package_vars _IN_KEY _IN_VAL)
         message("--> 软件版本: ${_IN_VAL}")
     endif(_Version EQUAL "0")
 
+    find_str("${_IN_KEY}" "CalVer" _CalVer)
+    if(_CalVer EQUAL "0")
+        set(CalVer "${_IN_VAL}" PARENT_SCOPE)
+        message("--> 日历化版本: ${_IN_VAL}")
+    endif(_CalVer EQUAL "0")
+
     find_str("${_IN_KEY}" "Architecture" _Architecture)
     if(_Architecture EQUAL "0")
-        set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "${_IN_VAL}" PARENT_SCOPE)
+        set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "${_IN_VAL}" PARENT_SCOPE)    
+        if(_IN_VAL STREQUAL "auto")
+            execute_process(
+                COMMAND dpkg --print-architecture
+                OUTPUT_VARIABLE _RETV
+                OUTPUT_STRIP_TRAILING_WHITESPACE
+            )
+            set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "${_RETV}" PARENT_SCOPE)
+        endif(_IN_VAL STREQUAL "auto")
         message("--> 软件架构: ${_IN_VAL}")
     endif(_Architecture EQUAL "0")
     
@@ -143,6 +157,12 @@ function(set_package_vars _IN_KEY _IN_VAL)
         set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "${_IN_VAL}" PARENT_SCOPE)
         message("--> 软件主页: ${_IN_VAL}")
     endif(_Homepage EQUAL "0")
+
+    find_str("${_IN_KEY}" "Recommends" _Recommends)
+    if(_Recommends EQUAL "0")
+        set(CPACK_DEBIAN_PACKAGE_RECOMMENDS "${_IN_VAL}" PARENT_SCOPE)
+        message("--> 软件建议: ${_IN_VAL}")
+    endif(_Recommends EQUAL "0")
     
 endfunction(set_package_vars _IN_KEY _IN_VAL)
 
@@ -228,6 +248,13 @@ function(add_package_descript IN_DES)
         set(ARCHITECTURE "arm64")
     endif()
 
+    #################### Calendar Version ###################
+    if("${CalVer}" STREQUAL "true")
+        string(TIMESTAMP BUILD_TIME "%Y%m%d")
+        set(CPACK_DEBIAN_PACKAGE_VERSION "${CPACK_DEBIAN_PACKAGE_VERSION}-${BUILD_TIME}")
+    endif("${CalVer}" STREQUAL "true")
+    
+
 
     ##################### deb file name #####################
     set(_Package      "${CPACK_DEBIAN_PACKAGE_NAME}")
@@ -235,7 +262,7 @@ function(add_package_descript IN_DES)
     set(_Architecture "${CPACK_DEBIAN_PACKAGE_ARCHITECTURE}")
 
     set(_DebFileName 
-        "${_Package}_${_Version}_${_Architecture}.deb"
+        "${_Package}_${_Version}_${_Architecture}${PACKAGE_SUFFIX}.deb"
     )
     set(CPACK_DEBIAN_FILE_NAME            ${_DebFileName})
 
@@ -248,7 +275,7 @@ function(add_package_descript IN_DES)
     # set(CPACK_DEBIAN_PACKAGE_MAINTAINER   "${Maintainer}")
     # set(CPACK_DEBIAN_PACKAGE_DESCRIPTION  "${Descrition}")
 
-
+    # 设置即将使用的标准脚本
     # set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA
     #     "${CMAKE_SOURCE_DIR}/config/DEBIAN/preinst"
     #     "${CMAKE_SOURCE_DIR}/config/DEBIAN/postinst"
@@ -256,8 +283,13 @@ function(add_package_descript IN_DES)
     #     "${CMAKE_SOURCE_DIR}/config/DEBIAN/postrm"
     # )
 
+    # 设置为ON，以便使用 dpkg-shlibdeps 生成更好的包依赖列表。
+    # set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+    # set(CPACK_DEBIAN_PACKAGE_GENERATE_SHLIBS ON)
+    # set(CPACK_DEBIAN_PACKAGE_GENERATE_SHLIBS_POLICY "=")
+
     include(CPack)
-    
+
 endfunction(add_package_descript IN_DES)
 
 
@@ -266,7 +298,7 @@ endfunction(add_package_descript IN_DES)
 # CPACK_DEBIAN_FILE_NAME                - n
 # CPACK_DEBIAN_PACKAGE_NAME             - y
 # CPACK_DEBIAN_PACKAGE_VERSION          - y
-# CPACK_DEBIAN_PACKAGE_ARCHITECTURE     - y
+# CPACK_DEBIAN_PACKAGE_ARCHITECTURE     - y(auto)
 # CPACK_DEBIAN_PACKAGE_DEPENDS          - y
 # CPACK_DEBIAN_PACKAGE_PRIORITY         - y
 # CPACK_DEBIAN_PACKAGE_MAINTAINER       - y

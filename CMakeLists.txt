@@ -18,7 +18,7 @@ set(APP_NAME "屏保拟态时钟")
 configure_file(cmake/config.h.in config.h @ONLY)
 
 # 构建程序主体, 依赖了 Qt5 核心库、WebEngineWidgets 库
-spark_add_executable(${PROJECT_NAME} src ${QRC_SOURCES})
+spark_add_executable_path(${PROJECT_NAME} src ${QRC_SOURCES})
 target_link_qt5(${PROJECT_NAME})
 target_link_qt5_WebEngineWidgets(${PROJECT_NAME})
 
