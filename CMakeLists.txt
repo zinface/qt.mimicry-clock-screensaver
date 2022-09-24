@@ -3,16 +3,11 @@ cmake_minimum_required(VERSION 3.5.1)
 
 project(mimicry-clock-screensaver LANGUAGES CXX VERSION 0.0.1)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTORCC ON)
-
-find_package(Qt5 COMPONENTS Core Widgets Network WebEngineWidgets Gui)
-
-# 头文件目录
-include_directories()
+include(cmake/SparkEnvConfig.cmake)
+include(cmake/SparkMacrosConfig.cmake)
+include(cmake/SparkFindLibraries.cmake)
+include(cmake/SparkFindQt5Config.cmake)
+include(cmake/SparkFindQt6Config.cmake)
 
 # 资源文件路径
 set(QRC_SOURCES "")
@@ -22,10 +17,12 @@ set(QRC_SOURCES "")
 set(APP_NAME "屏保拟态时钟")
 configure_file(cmake/config.h.in config.h @ONLY)
 
-add_executable(${PROJECT_NAME} "main.cpp"
+spark_add_executable(${PROJECT_NAME} "main.cpp"
     # "mainwindow.cpp" "mainwindow.h"
     ${QRC_SOURCES}
 )
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Widgets Qt5::Network Qt::WebEngineWidgets Qt::Gui)
+target_link_qt5(${PROJECT_NAME})
+target_link_qt5_WebEngineWidgets(${PROJECT_NAME})
 
 include(cmake/linux-install/linux-install.cmake)
+include(cmake/SparkBuildGraphviz.cmake)

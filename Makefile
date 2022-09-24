@@ -18,3 +18,8 @@ release:
 
 package: release
 	cd build && make package
+
+builddeps:
+	mkdir -p build
+	cd build && cmake ..
+	cd build && make builddeps
