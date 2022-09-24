@@ -26,9 +26,9 @@ int main(int argc, char *argv[])
  
 #ifdef QT_DEBUG 
     // 预览本项目内容
-    view->page()->load(QUrl::fromLocalFile(a.applicationDirPath() + "/../resources/assets/index.html"));
+    // view->page()->load(QUrl::fromLocalFile(a.applicationDirPath() + "/../resources/assets/index.html"));
     // 这是'中国台风网'页面
-    // view->page()->load(QUrl("http://typhoon.nmc.cn/web.html"));
+    view->page()->load(QUrl("http://typhoon.nmc.cn/web.html"));
     view->show();
 #else
     QDesktopWidget *desktop = QApplication::desktop();
@@ -44,7 +44,8 @@ int main(int argc, char *argv[])
     );
 
     // 程序默认为时钟屏保，如果你想增加逼格.. 可修改此处      
-    view->page()->load(QUrl::fromLocalFile("/usr/share/" PROJECT_NAME "/assets/index.html"));
+    // view->page()->load(QUrl::fromLocalFile("/usr/share/" PROJECT_NAME "/assets/index.html"));
+    view->page()->load(QUrl("http://typhoon.nmc.cn/web.html"));
     view->show();
 
     // 如果你不小心手动运行了它，你将需要进入 tty 模式 kill 掉该程序
