@@ -10,7 +10,7 @@ macro(install_deepin_screen_module)
         DESTINATION /usr/lib/deepin-screensaver/modules)
 endmacro(install_deepin_screen_module)
 
-function(add_deepin_screen_corver _SOURCE_IMAGE)
+function(add_deepin_screen_cover _SOURCE_IMAGE)
     find_program(CONVERT_WITH_IMAGEMAGICK convert)
     if(CONVERT_WITH_IMAGEMAGICK)
         # 软件包 imagemagick 提供了 convert 命令
@@ -31,8 +31,10 @@ function(add_deepin_screen_corver _SOURCE_IMAGE)
             "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}@2x.png"
             "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}@3x.png"
         )
+    else()
+        message(FATAL_ERROR "You should install the 'convert' command provided by imagemagick")
     endif(CONVERT_WITH_IMAGEMAGICK)
-endfunction(add_deepin_screen_corver _SOURCE_IMAGE)
+endfunction(add_deepin_screen_cover _SOURCE_IMAGE)
 
 
 # 如果常量为1、ON、YES、True、Y或非零数字，则为True。
