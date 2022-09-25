@@ -8,6 +8,7 @@ include(cmake/SparkMacrosConfig.cmake)
 include(cmake/SparkFindLibraries.cmake)
 include(cmake/SparkFindQt5Config.cmake)
 include(cmake/SparkFindQt6Config.cmake)
+include(cmake/DeepinScreensaverConfig.cmake)
 
 # 资源文件路径
 set(QRC_SOURCES "")
@@ -22,5 +23,12 @@ spark_add_executable_path(${PROJECT_NAME} src ${QRC_SOURCES})
 target_link_qt5(${PROJECT_NAME})
 target_link_qt5_WebEngineWidgets(${PROJECT_NAME})
 
-include(cmake/linux-install/linux-install.cmake)
+install_deepin_screen_module(TARGETS ${PROJECT_NAME}) # install 指令的封装
+add_deepin_screen_corver(resources/screenshot/mimicry-clock.png)
+install(DIRECTORY resources/assets
+    DESTINATION /usr/share/${PROJECT_NAME})
+
 include(cmake/SparkBuildGraphviz.cmake)
+
+find_package(DebPackage PATHS ${CMAKE_SOURCE_DIR})
+add_package_descript(cmake/package-deb.descript)
