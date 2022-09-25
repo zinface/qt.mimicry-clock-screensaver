@@ -7,7 +7,7 @@ ifneq ("$(OSID)", "")
 SUFFIX=_$(OSID)$(OSRELEASE)
 endif
 
-PROJECT_NAME=mimicry-clock-screensaver
+PROJECT_NAME=typhoon-view-screensaver
 
 all:
 	mkdir -p build

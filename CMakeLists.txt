@@ -24,9 +24,7 @@ target_link_qt5(${PROJECT_NAME})
 target_link_qt5_WebEngineWidgets(${PROJECT_NAME})
 
 install_deepin_screen_module(TARGETS ${PROJECT_NAME}) # install 指令的封装
-add_deepin_screen_cover(resources/screenshot/mimicry-clock.png)
-install(DIRECTORY resources/assets
-    DESTINATION /usr/share/${PROJECT_NAME})
+add_deepin_screen_cover(resources/screenshot/typhoon.nmc.cn.png)
 
 include(cmake/SparkBuildGraphviz.cmake)
 
