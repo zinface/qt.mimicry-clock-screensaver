@@ -1,4 +1,4 @@
-# qt.mimicry-clock-screensaver 
+# qt.mimicry-clock-screensaver - typhoon: 中国台风网-预览版分支
 
 > 适用于深度操作系统的屏保拟态时钟程序 - [基于此屏幕保护程序 - 开发指南](development.md)
 
