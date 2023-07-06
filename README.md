@@ -1,4 +1,4 @@
-# qt.mimicry-clock-screensaver - typhoon: 中国台风网-预览版分支
+# qt.mimicry-clock-screensaver - sakura: 樱花-屏保分支
 
 > 适用于深度操作系统的屏保拟态时钟程序 - [基于此屏幕保护程序 - 开发指南](development.md)
 
@@ -30,3 +30,6 @@
     // view->page()->load(QUrl("http://typhoon.nmc.cn/web.html")); 
     ```
     ![](resources/screenshot/typhoon.nmc.cn.png)
+
+    ![](resources/screenshot/sakura.png)
+

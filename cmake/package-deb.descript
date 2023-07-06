@@ -20,7 +20,7 @@
 # 打包类型，暂支持 deb, 未来支持 tgz(tar.gz)
 Type: deb
 # 软件包名称
-Package: typhoon-view-screensaver
+Package: sakura-screensaver
 # 软件包版本
 Version: 0.0.1
 # 日历化尾部版本
@@ -38,6 +38,6 @@ Maintainer: zinface <zinface@163.com>
 # 软件包主页
 Homepage: 
 # 软件包描述信息
-Descrition: 中国台风网屏保
- 适用于深度操作系统的中国台风网屏保程序
+Descrition: 樱花屏保
+ 适用于深度操作系统的樱花屏保程序
 

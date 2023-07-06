@@ -1,7 +1,7 @@
 
 cmake_minimum_required(VERSION 3.5.1)
 
-project(typhoon-view-screensaver LANGUAGES CXX VERSION 0.0.1)
+project(sakura-screensaver LANGUAGES CXX VERSION 0.0.1)
 
 include(cmake/SparkEnvConfig.cmake)
 include(cmake/SparkMacrosConfig.cmake)
@@ -15,7 +15,7 @@ set(QRC_SOURCES "")
 
 # 使用宏进行配置 config.h
 # 将项目名定义为资源结构路径 /usr/share/ + 项目名 + /assets/index.html
-set(APP_NAME "中国台风网 - 预览版")
+set(APP_NAME "樱花 - 预览版")
 configure_file(cmake/config.h.in config.h @ONLY)
 
 # 构建程序主体, 依赖了 Qt5 核心库、WebEngineWidgets 库
@@ -24,7 +24,9 @@ target_link_qt5(${PROJECT_NAME})
 target_link_qt5_WebEngineWidgets(${PROJECT_NAME})
 
 install_deepin_screen_module(TARGETS ${PROJECT_NAME}) # install 指令的封装
-add_deepin_screen_cover(resources/screenshot/typhoon.nmc.cn.png)
+add_deepin_screen_cover(resources/screenshot/sakura.png)
+install(DIRECTORY resources/assets
+    DESTINATION /usr/share/${PROJECT_NAME})
 
 include(cmake/SparkBuildGraphviz.cmake)
 
