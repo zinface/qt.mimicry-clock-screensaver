@@ -1,6 +1,6 @@
 # 注释行(使用方式)
-# find_package(DebPackage PATHS ${CMAKE_SOURCE_DIR})
-# add_package_descript(cmake/package-deb.descript)
+# find_package(SparkDebPackage PATHS ${CMAKE_SOURCE_DIR})
+# add_package_descript(cmake/spark-deb-package.descript)
 
 # 打包后的文件名称
 # FileName: 待定
@@ -19,12 +19,14 @@
 
 # 打包类型，暂支持 deb, 未来支持 tgz(tar.gz)
 Type: deb
-# 软件包名称
-Package: mimicry-clock-screensaver
-# 软件包版本
-Version: 0.0.2
+# 软件包名称(自动, 使用 PROJECT_NAME 变量值)
+Package: auto
+# 软件包版本(自动, 使用 PROJECT_VERSION 变量值)
+Version: auto
 # 日历化尾部版本
 CalVer: true
+# 声明发行版号(类似于 Debian11,Debian为OS标志，11为发行版号)
+OSD: false
 # 软件包架构(自动)
 Architecture: auto
 # 软件包属于的系统部分[admin|cli-mono|comm|database|debug|devel|doc|editors|education|electronics|embedded|fonts|games|gnome|gnu-r|gnustep|graphics|hamradio|haskell|httpd|interpreters|introspection|java|javascript|kde|kernel|libdevel|libs|lisp|localization|mail|math|metapackages|misc|net|news|ocaml|oldlibs|otherosfs|perl|php|python|ruby|rust|science|shells|sound|tasks|tex|text|utils|vcs|video|web|x11|xfce|zope]
@@ -37,6 +39,10 @@ Depends:
 Maintainer: zinface <zinface@163.com>
 # 软件包主页
 Homepage: 
+# 软件包建议
+Recommends: 
+# 软件冲突
+Conflicts: 
 # 软件包描述信息
 Descrition: 拟态时钟屏保
  适用于深度操作系统的拟态时钟屏保程序

@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.5.1)
 include(cmake/SparkWithGit.cmake)
 spark_include(SparkCMakeInfoBeforeConfig.cmake)
 
-project(mimicry-clock-screensaver LANGUAGES CXX VERSION 0.0.1)
+project(mimicry-clock-screensaver LANGUAGES CXX VERSION 1.0.0)
 
 spark_initialize_modules()
 
