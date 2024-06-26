@@ -1,13 +1,13 @@
 
 cmake_minimum_required(VERSION 3.5.1)
 
-project(sakura-screensaver LANGUAGES CXX VERSION 0.0.1)
+include(cmake/SparkWithGit.cmake)
+spark_include(SparkCMakeInfoBeforeConfig.cmake)
 
-include(cmake/SparkEnvConfig.cmake)
-include(cmake/SparkMacrosConfig.cmake)
-include(cmake/SparkFindLibraries.cmake)
-include(cmake/SparkFindQt5Config.cmake)
-include(cmake/SparkFindQt6Config.cmake)
+project(sakura-screensaver LANGUAGES CXX VERSION 1.0.0)
+
+spark_initialize_modules()
+
 include(cmake/DeepinScreensaverConfig.cmake)
 
 # 资源文件路径
@@ -19,16 +19,22 @@ set(APP_NAME "樱花 - 预览版")
 configure_file(cmake/config.h.in config.h @ONLY)
 
 # 构建程序主体, 依赖了 Qt5 核心库、WebEngineWidgets 库
-spark_add_executable_path(${PROJECT_NAME} src ${QRC_SOURCES})
-target_link_qt5(${PROJECT_NAME})
+spark_add_executable_path(${PROJECT_NAME} 
+    src
+    ${QRC_SOURCES}
+)
+spark_add_links_qt5(WebEngineWidgets)
 target_link_qt5_WebEngineWidgets(${PROJECT_NAME})
+
+spark_framework_include_with_git(${PROJECT_NAME} 
+    https://gitee.com/spark-framework-libs/spark-framework-features
+    FEATURES version screenutil
+)
 
 install_deepin_screen_module(TARGETS ${PROJECT_NAME}) # install 指令的封装
 add_deepin_screen_cover(resources/screenshot/sakura.png)
 install(DIRECTORY resources/assets
     DESTINATION /usr/share/${PROJECT_NAME})
 
-include(cmake/SparkBuildGraphviz.cmake)
-
-find_package(DebPackage PATHS ${CMAKE_SOURCE_DIR})
+spark_include(SparkDebPackageConfig.cmake)
 add_package_descript(cmake/package-deb.descript)
