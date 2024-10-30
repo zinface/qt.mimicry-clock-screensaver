@@ -1,4 +1,4 @@
-# qt.mimicry-clock-screensaver - starry-sky: 星空动画分支
+# qt.mimicry-clock-screensaver - animate-image: 次元图片分支
 
 > 适用于深度操作系统的屏保拟态时钟程序 - [基于此屏幕保护程序 - 开发指南](development.md)
 

@@ -40,123 +40,23 @@
     .octo-arm{animation:octocat-wave 560ms ease-in-out}}
 </style>
 
-<a href="https://github.com/he-weilai/love-code/" target="_blank" class="github-corner" aria-label="View source on GitHub">
-    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#000; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">  
-        </path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body">
-        </path>
-    </svg>
-</a>
 
 
 </body>
 <!-- Html代码 -->
 
 <script type="text/javascript">
-    var canvas = document.getElementById('canvas'),
-        ctx = canvas.getContext('2d'),
-        w = canvas.width = window.innerWidth,
-        h = canvas.height = window.innerHeight,
-
-        hue = 217,
-        stars = [],
-        count = 0,
-        maxStars = 1300;//星星数量
-
-    var canvas2 = document.createElement('canvas'),
-        ctx2 = canvas2.getContext('2d');
-    canvas2.width = 100;
-    canvas2.height = 100;
-
-    var half = canvas2.width / 2,
-        gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
-    gradient2.addColorStop(0.025, '#CCC');
-    gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
-    gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
-    gradient2.addColorStop(1, 'transparent');
-
-    ctx2.fillStyle = gradient2;
-    ctx2.beginPath();
-    ctx2.arc(half, half, half, 0, Math.PI * 2);
-    ctx2.fill();
-
-    //End cache
-
-    function random(min, max) {
-        if (arguments.length < 2) {
-            max = min;
-            min = 0;
-        }
-
-        if (min > max) {
-            var hold = max;
-            max = min;
-            min = hold;
-        }
-
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function maxOrbit(x, y) {
-        var max = Math.max(x, y),
-            diameter = Math.round(Math.sqrt(max * max + max * max));
-        return diameter / 2;
-        //星星移动范围，值越大范围越小，
-    }
-
-    var Star = function () {
-
-        this.orbitRadius = random(maxOrbit(w, h));
-        this.radius = random(60, this.orbitRadius) / 8;
-        //星星大小
-        this.orbitX = w / 2;
-        this.orbitY = h / 2;
-        this.timePassed = random(0, maxStars);
-        this.speed = random(this.orbitRadius) / 50000;
-        //星星移动速度
-        this.alpha = random(2, 10) / 10;
-
-        count++;
-        stars[count] = this;
-    }
-
-    Star.prototype.draw = function () {
-        var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
-            y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
-            twinkle = random(10);
-
-        if (twinkle === 1 && this.alpha > 0) {
-            this.alpha -= 0.05;
-        } else if (twinkle === 2 && this.alpha < 1) {
-            this.alpha += 0.05;
-        }
-
-        ctx.globalAlpha = this.alpha;
-        ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
-        this.timePassed += this.speed;
-    }
-
-    for (var i = 0; i < maxStars; i++) {
-        new Star();
-    }
-
-    function animation() {
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.globalAlpha = 0.5; //尾巴
-        ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 2)';
-        ctx.fillRect(0, 0, w, h)
-
-        ctx.globalCompositeOperation = 'lighter';
-        for (var i = 1, l = stars.length; i < l; i++) {
-            stars[i].draw();
-            canvas2.style.cssText = "display:none";
-        };
-
-        window.requestAnimationFrame(animation);
-    }
-
-    animation();
+    var url = "https://api.gumengya.com/Api/DmImg?format=image&appkey=b7a782741f667201b54880c925faec4b";
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var w = canvas.width = window.innerWidth;
+    var h = canvas.height = window.innerHeight;
+    // draw image
+    var img = new Image();
+    img.src = url;
+    img.onload = function () {
+        ctx.drawImage(img, 0, 0, w, h);
+    };
 </script>
 
 </html>
